@@ -8,13 +8,15 @@ import {
   AiOutlineTwitter,
   AiOutlineUser,
   AiOutlineShoppingCart,
+  AiOutlineMenu,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { formatter } from "utils/formater";
 import { ROUTERS } from "utils/router";
 
 const Header = () => {
-  const [menus, setMenus] = useState([
+  const [isShowCategories, setIsShowCategories] = useState(true);
+  const [menus] = useState([
     {
       name: "Trang chủ",
       path: ROUTERS.USER.HOME,
@@ -85,11 +87,6 @@ const Header = () => {
                 </li>
                 <li>
                   <Link to={""}>
-                    <AiOutlineTwitter />
-                  </Link>
-                </li>
-                <li>
-                  <Link to={""}>
                     <AiOutlineUser />
                   </Link>
                   <span>Đăng nhập</span>
@@ -112,6 +109,15 @@ const Header = () => {
                 {menus?.map((menu, key) => (
                   <li key={key} className={key === 0 ? "active" : ""}>
                     <Link to={menu?.path}>{menu?.name}</Link>
+                    {menu.child && (
+                      <ul className="header-menu-dropdown">
+                        {menu.child.map((menuChild, keyChild) => (
+                          <li key={`${key}-${keyChild}`}>
+                            <Link to={menuChild.path}>{menuChild.name}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -131,6 +137,37 @@ const Header = () => {
               </ul>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="container">
+        <div className="row hero-categories-container">
+          <div className="col-lg-3 hero-categories">
+            <div
+              className="hero-categories-all"
+              onClick={() => setIsShowCategories(!isShowCategories)}
+            >
+              <AiOutlineMenu />
+              Danh sách sản phẩm
+            </div>
+            <ul className={isShowCategories ? "" : "hidden"}>
+              <li>
+                <Link to="">Thịt tươi</Link>
+              </li>
+              <li>
+                <Link to="">Rau củ</Link>
+              </li>
+              <li>
+                <Link to="">Nước trái cây</Link>
+              </li>
+              <li>
+                <Link to="">Trái cây</Link>
+              </li>
+              <li>
+                <Link to="">Hải sản</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="col-lg-9">phai</div>
         </div>
       </div>
     </>
