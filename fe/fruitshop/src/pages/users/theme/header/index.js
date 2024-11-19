@@ -9,6 +9,7 @@ import {
   AiOutlineUser,
   AiOutlineShoppingCart,
   AiOutlineMenu,
+  AiOutlinePhone,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { formatter } from "utils/formater";
@@ -167,7 +168,41 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          <div className="col-lg-9">phai</div>
+          <div className="col-lg-9 hero-search-container">
+            <div className="hero-search">
+              <div className="hero-search-form">
+                <form>
+                  <input
+                    type="text"
+                    name=""
+                    value=""
+                    placeholder="Bạn đang tìm gì?"
+                  />
+                  <button type="submit" className="site-btn">
+                    Tìm kiếm
+                  </button>
+                </form>
+              </div>
+              <div className="hero-search-phone">
+                <div className="hero-search-phone-icon">
+                  <AiOutlinePhone/>
+                </div>
+                <div className="hero-search-phone-text">
+                <p>0961.186.670</p>
+                <span>Hỗ trợ 24/7</span>
+                </div>
+              </div>
+            </div>
+            <div className="hero-item">
+              <div className="hero-text">
+                <span>Trái cây tươi</span>
+                <h2>Rau quả <br/>
+                sạch 100%</h2>
+                <p>Miễn phí giao hàng tận nơi</p>
+                <Link to="" className="primay-btn">Mua ngay</Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
