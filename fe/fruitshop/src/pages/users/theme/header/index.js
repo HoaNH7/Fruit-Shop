@@ -10,13 +10,16 @@ import {
   AiOutlineShoppingCart,
   AiOutlineMenu,
   AiOutlinePhone,
+  AiOutlineGlobal,
 } from "react-icons/ai";
+import { BiUser } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { formatter } from "utils/formater";
 import { ROUTERS } from "utils/router";
 
 const Header = () => {
   const [isShowCategories, setIsShowCategories] = useState(true);
+  const [isShowHumberger, setIsShowHumberger] = useState(false);
   const [menus] = useState([
     {
       name: "Trang chủ",
@@ -57,6 +60,61 @@ const Header = () => {
 
   return (
     <>
+    <div className={`humberger-menu-overlay ${isShowHumberger ? "active" : ""}`} onClick={() => setIsShowHumberger(false)}></div>
+      <div
+        className={`humberger-menu-wrapper ${isShowHumberger ? "show" : ""}`}
+      >
+        <div className="header-logo">
+          <h1>Fruit Shop</h1>
+        </div>
+        <div className="humberger-menu-cart">
+          <ul>
+            <li>
+              <Link to={""}>
+                <AiOutlineShoppingCart /> <span>1</span>
+              </Link>
+            </li>
+          </ul>
+          <div className="header-cart-price">
+            Giỏ hàng: <span>{formatter(1001230)}</span>
+          </div>
+        </div>
+        <div className="humberger-menu-widget">
+          <div className="header-top-right-auth">
+            <Link to={""}>
+              <BiUser /> Đăng nhập
+            </Link>
+          </div>
+        </div>
+        <div className="humberger-menu-nav">
+          <ul>
+            <li>Menu Item</li>
+          </ul>
+        </div>
+        <div className="header-top-right-social">
+          <Link to={""}>
+            <AiOutlineFacebook />
+          </Link>
+          <Link to={""}>
+            <AiOutlineInstagram />
+          </Link>
+          <Link to={""}>
+            <AiOutlineLinkedin />
+          </Link>
+          <Link to={""}>
+            <AiOutlineGlobal />
+          </Link>
+        </div>
+        <div className="humberger-menu-contact">
+          <ul>
+            <li>
+              <i className="fa fa-envelope" /> hoanh472001@gmail.com
+            </li>
+            <li>Miễn phí đơn từ {formatter(200000)}</li>
+          </ul>
+        </div>
+      </div>
+
       <div className="header-top">
         <div className="container">
           <div className="row">
@@ -99,12 +157,12 @@ const Header = () => {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-xl-3">
+          <div className="col-lg-3">
             <div className="header-logo">
               <h1>Fruit Shop</h1>
             </div>
           </div>
-          <div className="col-xl-6">
+          <div className="col-lg-6">
             <nav className="header-menu">
               <ul>
                 {menus?.map((menu, key) => (
@@ -124,7 +182,7 @@ const Header = () => {
               </ul>
             </nav>
           </div>
-          <div className="col-xl-3">
+          <div className="col-lg-3">
             <div className="header-cart">
               <div className="header-cart-price">
                 <span>{formatter(1001230)}</span>
@@ -136,6 +194,9 @@ const Header = () => {
                   </Link>
                 </li>
               </ul>
+            </div>
+            <div className="humberger-open">
+              <AiOutlineMenu onClick={() => setIsShowHumberger(true)} />
             </div>
           </div>
         </div>
@@ -185,21 +246,25 @@ const Header = () => {
               </div>
               <div className="hero-search-phone">
                 <div className="hero-search-phone-icon">
-                  <AiOutlinePhone/>
+                  <AiOutlinePhone />
                 </div>
                 <div className="hero-search-phone-text">
-                <p>0961.186.670</p>
-                <span>Hỗ trợ 24/7</span>
+                  <p>0961.186.670</p>
+                  <span>Hỗ trợ 24/7</span>
                 </div>
               </div>
             </div>
             <div className="hero-item">
               <div className="hero-text">
                 <span>Trái cây tươi</span>
-                <h2>Rau quả <br/>
-                sạch 100%</h2>
+                <h2>
+                  Rau quả <br />
+                  sạch 100%
+                </h2>
                 <p>Miễn phí giao hàng tận nơi</p>
-                <Link to="" className="primay-btn">Mua ngay</Link>
+                <Link to="" className="primay-btn">
+                  Mua ngay
+                </Link>
               </div>
             </div>
           </div>
