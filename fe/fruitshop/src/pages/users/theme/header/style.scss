@@ -64,7 +64,6 @@ $bannerImg: "/assets/users/images/hero/banner.jpg";
         margin-left: 2px;
       }
     }
-
   }
 }
 
@@ -311,51 +310,71 @@ $bannerImg: "/assets/users/images/hero/banner.jpg";
     display: flex;
     align-items: center;
     width: 100%;
-    
+
     .hero-text {
-        padding-left: 75px;
+      padding-left: 75px;
     }
 
     span {
-        font-size: 14px;
-        text-transform: uppercase;
-        font-weight: 700;
-        letter-spacing: 4px;
-        color: map.get($theme-colors, "main");
+      font-size: 14px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: map.get($theme-colors, "main");
     }
 
-    h2{
-        font-size: 45px;
-        text-transform: uppercase;
-        font-weight: 700;
-        line-height: 52px;
-        color: map.get($theme-colors, "bold-text");
-        margin: 10px 0;
+    h2 {
+      font-size: 45px;
+      text-transform: uppercase;
+      font-weight: 700;
+      line-height: 52px;
+      color: map.get($theme-colors, "bold-text");
+      margin: 10px 0;
     }
 
     p {
-        font-size: 16px;
-        color: #6f6f6f;
-        font-weight: 400;
-        line-height: 26px;
-        margin: 0 0 15px 0;
+      font-size: 16px;
+      color: #6f6f6f;
+      font-weight: 400;
+      line-height: 26px;
+      margin: 0 0 15px 0;
     }
 
     a {
-        display: inline-block;
-        font-size: 14px;
-        padding: 10px 28px 10px;
-        color: #ffffff;
-        text-transform: uppercase;
-        font-weight: 700;
-        background: map.get($theme-colors, "main");
-        letter-spacing: 2px;
-        text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      padding: 10px 28px 10px;
+      color: #ffffff;
+      text-transform: uppercase;
+      font-weight: 700;
+      background: map.get($theme-colors, "main");
+      letter-spacing: 2px;
+      text-decoration: none;
     }
   }
 }
 
+.humberger-menu-wrapper, .humberger-open {
+  display: none;
+}
+
+@include Responsive($MEDIUM_DEVICE) {
+    .hero-search-form {
+      width: 530px !important;
+    }
+ }
+
 @include Responsive($TABLET_DEVICE) {
+
+  .hero-categories {
+    margin-bottom: 30px;
+  }
+
+  .hero-search-form {
+    width: 530px !important;
+    padding-left: unset !important;
+  }
+
   .header-top,
   .header-menu,
   .header-cart {
@@ -399,14 +418,144 @@ $bannerImg: "/assets/users/images/hero/banner.jpg";
     top: 0;
     height: 100%;
     width: 100%;
-    background: rgba(0,0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 100;
     visibility: hidden;
     transition: all, 0.2s;
 
     &.active {
       visibility: visible !important;
+    }
+  }
 
+  .humberger-menu-cart {
+    display: flex;
+    margin-bottom: 25px;
+
+    .header-cart-price {
+      font-size: 14px;
+      color: #6f6f6f;
+
+      span {
+        color: map.get($theme-colors, "bold-text");
+        font-weight: 700;
+      }
+    }
+
+    ul {
+      list-style: none;
+      display: inline-block;
+      margin-right: 15px;
+
+      li:last-child {
+        margin-right: 0;
+      }
+
+      li {
+        position: relative;
+
+        a {
+          font-size: 18px;
+          color: map.get($theme-colors, "normal-text");
+
+          span {
+            color: white;
+            background: map.get($theme-colors, "main");
+            height: 20px;
+            left: 10px;
+            top: -10px;
+            border-radius: 40px;
+            display: inline-block;
+            text-align: center;
+            line-height: 20px;
+            font-size: 13px;
+            position: absolute;
+            padding: 0px 7px;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+
+  .humberger-menu-widget {
+    margin-bottom: 20px;
+
+    .header-top-right-auth a {
+      display: block;
+      font-size: 14px;
+      color: map.get($theme-colors, "normal-text");
+      text-decoration: none;
+    }
+  }
+
+  .humberger-menu-nav {
+    margin-bottom: 20px;
+
+    ul {
+      list-style: none;
+
+      li {
+        padding: 8px 0;
+        border-bottom: 1px solid #e1e1e1;
+
+        a {
+          color: map.get($theme-colors, "normal-text");
+          font-size: 16px;
+          font-weight: 500;
+          text-decoration: none;
+
+          svg {
+            vertical-align: middle;
+            margin-left: 5px;
+          }
+        }
+      }
+
+      li:last-child {
+        border: none;
+      }
+    }
+
+    .header-menu-dropdown {
+      display: none;
+      padding: 5px 0;
+
+      li {
+        margin-left: 10px;
+        display: block;
+        margin-right: 0;
+      }
+    }
+
+    .show-submenu {
+      display: block;
+    }
+  }
+
+  .header-top-right-social {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 20px;
+
+    a {
+      font-size: 14px;
+      display: inline-block;
+      color: map.get($theme-colors, "normal-text");
+      margin-right: 25px;
+
+      svg {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .humberger-menu-contact {
+    ul li {
+      font-size: 14px;
+      display: inline-block;
+      color: map.get($theme-colors, "normal-text");
+      margin-bottom: 10px;
     }
   }
 }

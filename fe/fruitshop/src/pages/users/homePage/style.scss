@@ -1,5 +1,6 @@
 @use "sass:map";
 @import "style/pages/theme";
+@import "style/pages/all";
 
 .container-categories-slider {
   max-width: 1200px !important;
@@ -167,4 +168,23 @@
     img {
         width: 100%;
     }
+}
+
+@include Responsive($MEDIUM_DEVICE) {
+  .container {
+    width: 990px !important;
+  }
+}
+
+@include Responsive($TABLET_DEVICE) {
+  .container {
+    width: 750px !important;
+  }
+}
+
+
+@include Responsive($WIDE_DEVICE) {
+  .container {
+    width: 540px !important;
+  }
 }

@@ -11,16 +11,19 @@ import {
   AiOutlineMenu,
   AiOutlinePhone,
   AiOutlineGlobal,
+  AiOutlineDownCircle,
+  AiOutlineUpCircle,
 } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { formatter } from "utils/formater";
 import { ROUTERS } from "utils/router";
+import { MdEmail } from "react-icons/md";
 
 const Header = () => {
   const [isShowCategories, setIsShowCategories] = useState(true);
   const [isShowHumberger, setIsShowHumberger] = useState(false);
-  const [menus] = useState([
+  const [menus, setMenus] = useState([
     {
       name: "Trang chủ",
       path: ROUTERS.USER.HOME,
@@ -60,7 +63,10 @@ const Header = () => {
 
   return (
     <>
-    <div className={`humberger-menu-overlay ${isShowHumberger ? "active" : ""}`} onClick={() => setIsShowHumberger(false)}></div>
+      <div
+        className={`humberger-menu-overlay ${isShowHumberger ? "active" : ""}`}
+        onClick={() => setIsShowHumberger(false)}
+      ></div>
       <div
         className={`humberger-menu-wrapper ${isShowHumberger ? "show" : ""}`}
       >
@@ -88,7 +94,39 @@ const Header = () => {
         </div>
         <div className="humberger-menu-nav">
           <ul>
-            <li>Menu Item</li>
+            {menus.map((menu, key) => (
+              <li key={key} to={menu.path}>
+                <Link
+                  to={menu.path}
+                  onClick={() => {
+                    const newMenus = [...menus];
+                    newMenus[key].isShowSubmenu = !newMenus[key].isShowSubmenu;
+                    setMenus(newMenus);
+                  }}
+                >
+                  {menu.name}
+                  {menu.child &&
+                    (menu.isShowSubmenu ? (
+                      <AiOutlineDownCircle />
+                    ) : (
+                      <AiOutlineUpCircle />
+                    ))}
+                </Link>
+                {menu.child && (
+                  <ul
+                    className={`header-menu-dropdown ${
+                      menu.isShowSubmenu ? "show-submenu" : ""
+                    }`}
+                  >
+                    {menu.child.map((childItem, childKey) => (
+                      <li key={`${key}-${childKey}`}>
+                        <Link to={childItem.path}>{childItem.name}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
         <div className="header-top-right-social">
@@ -121,7 +159,7 @@ const Header = () => {
             <div className="col-6 header-top-left">
               <ul>
                 <li>
-                  <AiOutlineMail />
+                  <MdEmail />
                   hoanh472001@gmail.com
                 </li>
                 <li>Miễn phí ship đơn từ {formatter(200000)}</li>
@@ -203,7 +241,7 @@ const Header = () => {
       </div>
       <div className="container">
         <div className="row hero-categories-container">
-          <div className="col-lg-3 hero-categories">
+          <div className="col-lg-3 col-sm-12 col-md-12 col-xs-12 hero-categories">
             <div
               className="hero-categories-all"
               onClick={() => setIsShowCategories(!isShowCategories)}
@@ -229,7 +267,7 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          <div className="col-lg-9 hero-search-container">
+          <div className="col-lg-9 col-sm-12 col-md-12 col-xs-12 hero-search-container">
             <div className="hero-search">
               <div className="hero-search-form">
                 <form>
