@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import "./style.scss";
 import {
   AiOutlineFacebook,
@@ -15,14 +15,24 @@ import {
   AiOutlineUpCircle,
 } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { formatter } from "utils/formater";
 import { ROUTERS } from "utils/router";
 import { MdEmail } from "react-icons/md";
 
+export const categories = [
+  "Thịt tươi",
+  "Rau củ",
+  "Nước trái cây",
+  "Trái cây",
+  "Hải sản",
+]
+
 const Header = () => {
+  const location = useLocation();
   const [isShowCategories, setIsShowCategories] = useState(true);
-  const [isShowHumberger, setIsShowHumberger] = useState(false);
+  const [isHome, setIsHome] = useState(location.pathname.length <= 1);
+  const [isShowHumberger, setIsShowHumberger] = useState(isHome);
   const [menus, setMenus] = useState([
     {
       name: "Trang chủ",
@@ -60,6 +70,14 @@ const Header = () => {
       path: ROUTERS.USER.HOME,
     },
   ]);
+
+  
+
+  useEffect(() => {
+    const isHome = location.pathname.length <= 1;
+    setIsHome(isHome);
+    setIsShowCategories(isHome);
+  }, [location])
 
   return (
     <>
@@ -114,9 +132,8 @@ const Header = () => {
                 </Link>
                 {menu.child && (
                   <ul
-                    className={`header-menu-dropdown ${
-                      menu.isShowSubmenu ? "show-submenu" : ""
-                    }`}
+                    className={`header-menu-dropdown ${menu.isShowSubmenu ? "show-submenu" : ""
+                      }`}
                   >
                     {menu.child.map((childItem, childKey) => (
                       <li key={`${key}-${childKey}`}>
@@ -250,21 +267,13 @@ const Header = () => {
               Danh sách sản phẩm
             </div>
             <ul className={isShowCategories ? "" : "hidden"}>
-              <li>
-                <Link to="">Thịt tươi</Link>
-              </li>
-              <li>
-                <Link to="">Rau củ</Link>
-              </li>
-              <li>
-                <Link to="">Nước trái cây</Link>
-              </li>
-              <li>
-                <Link to="">Trái cây</Link>
-              </li>
-              <li>
-                <Link to="">Hải sản</Link>
-              </li>
+              {
+                categories.map((category, key) => (
+                  <li key={key}>
+                    <Link to={ROUTERS.USER.PRODUCTS}>{category}</Link>
+                  </li>
+                ))
+              }
             </ul>
           </div>
           <div className="col-lg-9 col-sm-12 col-md-12 col-xs-12 hero-search-container">
@@ -292,19 +301,24 @@ const Header = () => {
                 </div>
               </div>
             </div>
-            <div className="hero-item">
-              <div className="hero-text">
-                <span>Trái cây tươi</span>
-                <h2>
-                  Rau quả <br />
-                  sạch 100%
-                </h2>
-                <p>Miễn phí giao hàng tận nơi</p>
-                <Link to="" className="primay-btn">
-                  Mua ngay
-                </Link>
-              </div>
-            </div>
+            {
+
+              isHome && (
+                <div className="hero-item">
+                  <div className="hero-text">
+                    <span>Trái cây tươi</span>
+                    <h2>
+                      Rau quả <br />
+                      sạch 100%
+                    </h2>
+                    <p>Miễn phí giao hàng tận nơi</p>
+                    <Link to="" className="primay-btn">
+                      Mua ngay
+                    </Link>
+                  </div>
+                </div>
+              )
+            }
           </div>
         </div>
       </div>

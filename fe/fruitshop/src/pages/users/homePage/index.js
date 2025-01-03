@@ -160,7 +160,7 @@ const HomePage = () => {
           price: 87000,
         },
       ],
-    }
+    },
   };
 
   const renderFeaturedProducts = (data) => {
@@ -173,8 +173,8 @@ const HomePage = () => {
       const tabPanel = [];
       data[key].products.forEach((item, j) => {
         tabPanel.push(
-          <div className="col-lg-3" key={j}>
-            <div className="featured-item">
+          <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={j}>
+            <div className="featured-item pl-r-3">
               <div
                 className="featured-item-pic"
                 style={{
