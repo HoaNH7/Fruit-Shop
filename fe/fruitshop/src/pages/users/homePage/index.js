@@ -13,6 +13,7 @@ import cat5Img from "assets/users/images/categories/thitbo.png";
 import feature1Img from "assets/users/images/featured/camtuoi.png";
 import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
 import { formatter } from "utils/formater";
+import ProductCard from "component/ProductCard";
 
 const HomePage = () => {
   const responsive = {
@@ -174,29 +175,7 @@ const HomePage = () => {
       data[key].products.forEach((item, j) => {
         tabPanel.push(
           <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={j}>
-            <div className="featured-item pl-r-3">
-              <div
-                className="featured-item-pic"
-                style={{
-                  backgroundImage: `url(${item.img})`,
-                }}
-              >
-                <ul className="featured-item-pic-hover">
-                  <li>
-                    <AiOutlineEye />
-                  </li>
-                  <li>
-                    <AiOutlineShoppingCart />
-                  </li>
-                </ul>
-              </div>
-              <div className="featured-item-text">
-                <h6>
-                  <Link to="">{item.name}</Link>
-                </h6>
-                <h5>{formatter(item.price)}</h5>
-              </div>
-            </div>
+            <ProductCard name={item.name} img={item.img} price={item.price}/>
           </div>
         );
       });
